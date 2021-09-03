@@ -79,13 +79,13 @@
     <form action="index.php" enctype="multipart/form-data" method="post">
         <label>画像/動画アップロード</label>
         <input type="file" name="upfile">
-        <input type="text" id="linkid" name="linkid" size=3 value="00">
+        <input type="text" id="linkid" name="linkid" size=3 value="種別">
         <br>
         ※画像はjpeg方式，png方式，gif方式に対応しています．動画はmp4方式のみ対応しています．<br>
         <input type="submit" value="アップロード">
     </form>
     <form action="index.php" enctype="multipart/form-data" method="post">
-        <input type="text" id="readid" name="readid" size=3 value="00">
+        <input type="text" id="readid" name="readid" size=3 value="種別">
         <input type="submit" value="読み出し">
     </form>
 
