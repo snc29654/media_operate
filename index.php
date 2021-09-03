@@ -78,8 +78,8 @@
 <body>
     <form action="index.php" enctype="multipart/form-data" method="post">
         <label>画像/動画アップロード</label>
-        <input type="file" name="upfile">
-        <input type="text" id="linkid" name="linkid" size=20 value="種別">
+        <input type="file" name="upfile"><br>
+        <input type="text" id="linkid" name="linkid" size=50 value="写真のコメント">
         <br>
         ※画像はjpeg方式，png方式，gif方式に対応しています．動画はmp4方式のみ対応しています．<br>
         <input type="submit" value="アップロード">
