@@ -79,9 +79,9 @@
     <form action="index.php" enctype="multipart/form-data" method="post">
         <label>画像/動画アップロード</label>
         <input type="file" name="upfile"><br>
-        <input type="text" id="linkid" name="linkid" size=50 value="写真のコメント">
+        <textarea name="linkid" rows="10" cols="80" id="linkid" placeholder="写真のコメント" ></textarea>
         <br>
-        ※画像はjpeg方式，png方式，gif方式に対応しています．動画はmp4方式のみ対応しています．<br>
+        ※画像サムネイルアルバム<br>
         <input type="submit" value="アップロード">
     </form>
     <form action="index.php" enctype="multipart/form-data" method="post">
@@ -96,19 +96,24 @@
     $stmt = $pdo->prepare($sql);
     $stmt -> execute();
     while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)){
+        echo "<table border =\"3\">";
+        echo "<td>";
+
         echo ($row["id"]."<br/>");
         //動画と画像で場合分け
         $target = $row["fname"];
+        $linkid = $row["linkid"];
         if($row["extension"] == "mp4"){
             echo ("<video src=\"import_media.php?target=$target\" width=\"426\" height=\"240\" controls></video>");
         }
         elseif($row["extension"] == "jpeg" || $row["extension"] == "png" || $row["extension"] == "gif"){
             echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
         }
-        echo $row["linkid"];
+        echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\">$linkid</textarea>";
         echo ("<br/><br/>");
+        echo "</td>";
     }
-    }    
+}    
 
     ?>
 
