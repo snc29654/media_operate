@@ -79,20 +79,19 @@
     <form action="index.php" enctype="multipart/form-data" method="post">
         <label>画像/動画アップロード</label>
         <input type="file" name="upfile">
-        <input type="text" id="linkid" name="linkid" size=3 value="種別">
+        <input type="text" id="linkid" name="linkid" size=20 value="種別">
         <br>
         ※画像はjpeg方式，png方式，gif方式に対応しています．動画はmp4方式のみ対応しています．<br>
         <input type="submit" value="アップロード">
     </form>
     <form action="index.php" enctype="multipart/form-data" method="post">
-        <input type="text" id="readid" name="readid" size=3 value="種別">
         <input type="submit" value="読み出し">
     </form>
 
     <?php
     //DBから取得して表示する．
-    if(isset($_POST['readid'])){
-        $sql = "SELECT * FROM media WHERE linkid = '${_POST['readid']}'" ;
+    if($_SERVER["REQUEST_METHOD"] === "POST"){
+                $sql = "SELECT * FROM media" ;
     //$sql = "SELECT * FROM media ORDER BY id;";
     $stmt = $pdo->prepare($sql);
     $stmt -> execute();
@@ -106,6 +105,7 @@
         elseif($row["extension"] == "jpeg" || $row["extension"] == "png" || $row["extension"] == "gif"){
             echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
         }
+        echo $row["linkid"];
         echo ("<br/><br/>");
     }
     }    
