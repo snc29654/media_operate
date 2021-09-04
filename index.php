@@ -100,6 +100,12 @@
             $stmt = $pdo->prepare($sql);
             $stmt -> execute();
             exit;
+        }else if(isset($_POST["update"])){
+            $sql = "UPDATE media SET linkid='${_POST['linkid']}' WHERE id ='${_POST['update']}' ";
+            $stmt = $pdo->prepare($sql);
+            $stmt -> execute();
+            exit;
+
         }else{
             $sql = "SELECT * FROM media" ;
             //$sql = "SELECT * FROM media ORDER BY id;";
@@ -139,8 +145,11 @@
 
         }
         echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+        echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
         echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\">$linkid</textarea>";
+        echo "<input type=\"submit\" value=\"更新\" /></p>";
         echo ("<br/><br/>");
+        echo "</form>";
 
         echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
         echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
