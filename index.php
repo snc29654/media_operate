@@ -83,9 +83,12 @@
         <br>
         ※画像サムネイルアルバム<br>
         <input type="submit" value="アップロード">
-    </form>
-    <form action="index.php" enctype="multipart/form-data" method="post">
+    <action="index.php" enctype="multipart/form-data" method="post">
         <input type="submit" value="読み出し">
+        <select name="jpgsize" id="jpgsize">
+            <option value="0">サムネイル</option>
+            <option value="1">等倍</option>
+        </select></p>
     </form>
 
     <?php
@@ -121,7 +124,19 @@
             echo ("<video src=\"import_media.php?target=$target\" width=\"426\" height=\"240\" controls></video>");
         }
         elseif($row["extension"] == "jpeg" || $row["extension"] == "png" || $row["extension"] == "gif"){
-            echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
+
+            if($_SERVER["REQUEST_METHOD"] === "POST"){
+
+                if(strcmp($_POST['jpgsize'],"0")==0){    
+                    echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
+                }else{
+                    echo ("<img src='import_media.php?target=$target'>");
+                }    
+            }else{
+                echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
+
+            }    
+
         }
         echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
         echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\">$linkid</textarea>";
