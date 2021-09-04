@@ -91,6 +91,19 @@
     <?php
     //DBから取得して表示する．
     if($_SERVER["REQUEST_METHOD"] === "POST"){
+        if(isset($_POST["delseg"])){
+
+            $sql = "DELETE FROM media WHERE id = '${_POST['delseg']}'" ;
+            $stmt = $pdo->prepare($sql);
+            $stmt -> execute();
+            exit;
+        }else{
+            $sql = "SELECT * FROM media" ;
+            //$sql = "SELECT * FROM media ORDER BY id;";
+            $stmt = $pdo->prepare($sql);
+            $stmt -> execute();
+        
+        }
                 $sql = "SELECT * FROM media" ;
     //$sql = "SELECT * FROM media ORDER BY id;";
     $stmt = $pdo->prepare($sql);
@@ -103,14 +116,23 @@
         //動画と画像で場合分け
         $target = $row["fname"];
         $linkid = $row["linkid"];
+        $id = $row["id"];
         if($row["extension"] == "mp4"){
             echo ("<video src=\"import_media.php?target=$target\" width=\"426\" height=\"240\" controls></video>");
         }
         elseif($row["extension"] == "jpeg" || $row["extension"] == "png" || $row["extension"] == "gif"){
             echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
         }
+        echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
         echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\">$linkid</textarea>";
         echo ("<br/><br/>");
+
+        echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+        echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
+        echo "<input type=\"submit\" value=\"削除\" /></p>";
+        echo "</form>";
+    
+
         echo "</td>";
     }
 }    
