@@ -1,15 +1,12 @@
 <?php
+include('param.php');
 
 
 try{
-    $dbtable = "media"; 
-    $param = "mysql:dbname=mediatest;host=localhost";
-    $user = "root"; 
-    $pass = ""; 
     
 
     $pdo = new PDO(
-        $param, 
+        $dsn, 
         $user,
         $pass
     );

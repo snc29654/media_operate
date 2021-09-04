@@ -1,4 +1,6 @@
 <?php
+    include('param.php');
+
     if(isset($_GET["target"]) && $_GET["target"] !== ""){
         $target = $_GET["target"];
     }
@@ -12,9 +14,7 @@
         'mp4' => 'video/mp4'
     );
     try {
-        $user = "root";
-        $pass = "";
-        $pdo = new PDO("mysql:host=127.0.0.1;dbname=mediatest;charset=utf8", $user, $pass);
+        $pdo = new PDO($dsn, $user, $pass);
         $sql = "SELECT * FROM media WHERE fname = :target;";
         $stmt = $pdo->prepare($sql);
         $stmt -> bindValue(":target", $target, PDO::PARAM_STR);
