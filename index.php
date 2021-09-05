@@ -119,10 +119,7 @@
     $stmt = $pdo->prepare($sql);
     $stmt -> execute();
     while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)){
-        echo "<table border =\"3\">";
-        echo "<td>";
 
-        echo ($row["id"]."<br/>");
         //動画と画像で場合分け
         $target = $row["fname"];
         $linkid = $row["linkid"];
@@ -135,35 +132,62 @@
             if($_SERVER["REQUEST_METHOD"] === "POST"){
                 if(isset($_POST['selseg'])){
                     if($_POST['selseg'] ==$id){    
+                        echo "<table border =\"3\">";
+                        echo "<td>";
+                                        echo ($row["id"]."<br/>");
                         echo ("<img src='import_media.php?target=$target'>");
+                        exit;
                     }else{
-                        echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
+//                        echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
                     }
                 }else{
-                    echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
+                    echo "<table border =\"3\">";
+                    echo "<td>";
+                                echo ($row["id"]."<br/>");
+                    echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                    echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
+                    echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
+                    echo "<input type=\"submit\" value=\"更新\" /></p>";
+                    echo "</form>";
+            
+                    echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                    echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
+                    echo "<input type=\"submit\" value=\"削除\" /></p>";
+                    echo "</form>";
+                
+                    echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                    echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
+                    echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
+                    echo "</form>";
+            
+                    echo "</td>";
+                                echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
                 }        
             }else{
+                echo "<table border =\"3\">";
+                echo "<td>";
+                        echo ($row["id"]."<br/>");
                 echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
-            }    
+                echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
+                echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
+                echo "<input type=\"submit\" value=\"更新\" /></p>";
+                echo "</form>";
+        
+                echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
+                echo "<input type=\"submit\" value=\"削除\" /></p>";
+                echo "</form>";
+            
+                echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
+                echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
+                echo "</form>";
+        
+                    }    
+                    echo "</td>";
 
         }
-        echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
-        echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
-        echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
-        echo "<input type=\"submit\" value=\"更新\" /></p>";
-        echo "</form>";
-
-        echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
-        echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
-        echo "<input type=\"submit\" value=\"削除\" /></p>";
-        echo "</form>";
-    
-        echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
-        echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
-        echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
-        echo "</form>";
-
-        echo "</td>";
     }
 }    
 
