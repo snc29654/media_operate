@@ -85,14 +85,10 @@
         <input type="file" name="upfile"><br>
         <textarea name="linkid" rows="10" cols="80" id="linkid" placeholder="写真のコメント" ></textarea>
         <br>
-        <label>※画像サムネイルアルバム</label><br>
+        <label>操作：ファイル選択-->アップロード-->読み出し</label><br>
         <input type="submit" value="アップロード">
     <action="index.php" enctype="multipart/form-data" method="post">
         <input type="submit" value="読み出し">
-        <select name="jpgsize" id="jpgsize">
-            <option value="0">サムネイル</option>
-            <option value="1">等倍</option>
-        </select></p>
     </form>
     </div>
     </div>
