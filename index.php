@@ -73,15 +73,19 @@
 <head>
     <meta charset="utf-8">
     <title>media</title>
+    <link rel="stylesheet" href="sample.css" type="text/css">
+
 </head>
 
 <body>
+    <div>
+    <div calss="size_test">
     <form action="index.php" enctype="multipart/form-data" method="post">
         <label>画像/動画アップロード</label>
         <input type="file" name="upfile"><br>
         <textarea name="linkid" rows="10" cols="80" id="linkid" placeholder="写真のコメント" ></textarea>
         <br>
-        ※画像サムネイルアルバム<br>
+        <label>※画像サムネイルアルバム</label><br>
         <input type="submit" value="アップロード">
     <action="index.php" enctype="multipart/form-data" method="post">
         <input type="submit" value="読み出し">
@@ -90,7 +94,8 @@
             <option value="1">等倍</option>
         </select></p>
     </form>
-
+    </div>
+    </div>
     <?php
     //DBから取得して表示する．
     if($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -146,7 +151,7 @@
         }
         echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
         echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
-        echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\">$linkid</textarea>";
+        echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
         echo "<input type=\"submit\" value=\"更新\" /></p>";
         echo ("<br/><br/>");
         echo "</form>";
