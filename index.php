@@ -137,15 +137,17 @@
         elseif($row["extension"] == "jpeg" || $row["extension"] == "png" || $row["extension"] == "gif"){
 
             if($_SERVER["REQUEST_METHOD"] === "POST"){
-
-                if(strcmp($_POST['jpgsize'],"0")==0){    
-                    echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
+                if(isset($_POST['selseg'])){
+                    if($_POST['selseg'] ==$id){    
+                        echo ("<img src='import_media.php?target=$target'>");
+                    }else{
+                        echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
+                    }
                 }else{
-                    echo ("<img src='import_media.php?target=$target'>");
-                }    
+                    echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
+                }        
             }else{
                 echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
-
             }    
 
         }
@@ -153,7 +155,6 @@
         echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
         echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
         echo "<input type=\"submit\" value=\"更新\" /></p>";
-        echo ("<br/><br/>");
         echo "</form>";
 
         echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
@@ -161,6 +162,10 @@
         echo "<input type=\"submit\" value=\"削除\" /></p>";
         echo "</form>";
     
+        echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+        echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
+        echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
+        echo "</form>";
 
         echo "</td>";
     }
