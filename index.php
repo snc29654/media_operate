@@ -84,7 +84,7 @@
     <input type="submit" value="ログイン" /></p>
     </form>
 
-    <?php
+<?php
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         if(isset($_POST["username"])){
             $username = $_POST["username"];
@@ -92,26 +92,26 @@
 
 
 
-    echo "<div>";
-    echo "<div calss=\"size_test\">";
-    echo "<form action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
-    echo "<label>画像/動画アップロード</label>";
-    echo "<input type=\"file\" name=\"upfile\"><br>";
-    echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" placeholder=\"写真のコメント\" ></textarea>";
-    echo "<br>";
-    echo "<label>操作：ファイル選択-->アップロード-->読み出し</label><br>";
-    echo "<input type=\"submit\" value=\"アップロード\">";
-    echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
-    echo "<input type=\"submit\" value=\"読み出し\">";
-    echo "</form>";
-    echo "</div>";
-    echo "</div>";
-    }
-    }
+                echo "<div>";
+                echo "<div calss=\"size_test\">";
+                echo "<form action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
+                echo "<label>画像/動画アップロード</label>";
+                echo "<input type=\"file\" name=\"upfile\"><br>";
+                echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" placeholder=\"写真のコメント\" ></textarea>";
+                echo "<br>";
+                echo "<label>操作：ファイル選択-->アップロード-->読み出し</label><br>";
+                echo "<input type=\"submit\" value=\"アップロード\">";
+                echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
+                echo "<input type=\"submit\" value=\"読み出し\">";
+                echo "</form>";
+                echo "</div>";
+                echo "</div>";
+            }
+        }
 
     }
-    ?>
-    <?php
+?>
+<?php
     //DBから取得して表示する．
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         if(isset($_POST["delseg"])){
@@ -205,14 +205,14 @@
                 echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
                 echo "</form>";
         
-                    }    
-                    echo "</td>";
+            }    
+            echo "</td>";
 
         }
     }
 }    
 
-    ?>
+?>
 
 </body>
 </html>
