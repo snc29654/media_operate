@@ -80,8 +80,8 @@
 <body>
 
     <form action="" method="post" enctype="multipart/form-data">
-    <p><input type="text" size="10" id="username" name="username" value="guest">
-    <input type="submit" value="ユーザー名" /></p>
+    <p><input type="text" size="10" id="username" name="username"  placeholder="username">
+    <input type="submit" value="ログイン" /></p>
     </form>
 
     <?php
@@ -168,7 +168,7 @@
 
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
-                    echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
+                    echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" style=\"background-color:#bde9ba\">$linkid</textarea>";
                         echo "<input type=\"submit\" value=\"更新\" /></p>";
                     echo "</form>";
             
