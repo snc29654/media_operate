@@ -138,6 +138,7 @@
         //動画と画像で場合分け
         $target = $row["fname"];
         $linkid = $row["linkid"];
+        $userkey = $row["userkey"];
         $id = $row["id"];
         if($row["extension"] == "mp4"){
             echo ("<video src=\"import_media.php?target=$target\" width=\"426\" height=\"240\" controls></video>");
@@ -174,6 +175,7 @@
                     echo "</form>";
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
+                    echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                     echo "<input type=\"submit\" value=\"予備\" /></p>";
                     echo "</form>";
             
@@ -198,6 +200,8 @@
             
                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
+                echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
+                echo "<textarea name=\"userkey\" rows=\"1\" cols=\"20\" id=\"userkey\" placeholder=\"userkey\" ></textarea>";
                 echo "<input type=\"submit\" value=\"予備\" /></p>";
                 echo "</form>";
         
