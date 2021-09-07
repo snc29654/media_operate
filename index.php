@@ -171,6 +171,11 @@
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
                         echo "<input type=\"submit\" value=\"削除\" /></p>";
+                    echo "</form>";
+                    echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                    echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
+                    echo "<input type=\"submit\" value=\"予備\" /></p>";
+                    echo "</form>";
             
                     echo "</td>";
                                 echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
@@ -191,6 +196,10 @@
                 echo "<input type=\"submit\" value=\"削除\" /></p>";
                 echo "</form>";
             
+                echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
+                echo "<input type=\"submit\" value=\"予備\" /></p>";
+                echo "</form>";
         
             }    
             echo "</td>";
