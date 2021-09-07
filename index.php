@@ -20,6 +20,11 @@
 
             $linkid = $_POST["linkid"];
             $userkey = $_POST["userkey"];
+            if($userkey==""){
+                echo "no input userkey";
+                exit;
+
+            }
             //画像・動画をバイナリデータにする．
             $raw_data = file_get_contents($_FILES['upfile']['tmp_name']);
 
