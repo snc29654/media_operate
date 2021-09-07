@@ -15,6 +15,7 @@ try{
     $pdo->exec("create table if not exists $dbtable(
         id int not null auto_increment,
         linkid TEXT,
+        userkey TEXT,
         fname TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , 
         extension TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , 
         raw_data LONGBLOB NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

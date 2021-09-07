@@ -19,6 +19,7 @@
             }
 
             $linkid = $_POST["linkid"];
+            $userkey = $_POST["userkey"];
             //画像・動画をバイナリデータにする．
             $raw_data = file_get_contents($_FILES['upfile']['tmp_name']);
 
@@ -50,9 +51,10 @@
             $fname = hash("sha256", $fname);
 
             //画像・動画をDBに格納．
-            $sql = "INSERT INTO media(linkid, fname, extension, raw_data) VALUES (:linkid, :fname, :extension, :raw_data);";
+            $sql = "INSERT INTO media(linkid,userkey, fname, extension, raw_data) VALUES (:linkid, :userkey, :fname, :extension, :raw_data);";
             $stmt = $pdo->prepare($sql);
             $stmt -> bindValue(":linkid",$linkid, PDO::PARAM_STR);
+            $stmt -> bindValue(":userkey",$userkey, PDO::PARAM_STR);
             $stmt -> bindValue(":fname",$fname, PDO::PARAM_STR);
             $stmt -> bindValue(":extension",$extension, PDO::PARAM_STR);
             $stmt -> bindValue(":raw_data",$raw_data, PDO::PARAM_STR);
@@ -79,16 +81,8 @@
 
 <body>
 
-    <form action="" method="post" enctype="multipart/form-data">
-    <p><input type="text" size="10" id="username" name="username"  placeholder="username">
-    <input type="submit" value="ログイン" /></p>
-    </form>
 
 <?php
-    if($_SERVER["REQUEST_METHOD"] === "POST"){
-        if(isset($_POST["username"])){
-            $username = $_POST["username"];
-            if(strcmp($username,"admin")==0){    
 
 
 
@@ -102,14 +96,11 @@
                 echo "<label>操作：ファイル選択-->アップロード-->読み出し</label><br>";
                 echo "<input type=\"submit\" value=\"アップロード\">";
                 echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
+                echo "<textarea name=\"userkey\" rows=\"1\" cols=\"20\" id=\"userkey\" placeholder=\"userkey\" ></textarea>";
                 echo "<input type=\"submit\" value=\"読み出し\">";
                 echo "</form>";
                 echo "</div>";
                 echo "</div>";
-            }
-        }
-
-    }
 ?>
 <?php
     //DBから取得して表示する．
@@ -127,16 +118,16 @@
             exit;
 
         }else{
-            $sql = "SELECT * FROM media" ;
+            $sql = "SELECT * FROM media WHERE userkey = '${_POST['userkey']}'" ;
             //$sql = "SELECT * FROM media ORDER BY id;";
             $stmt = $pdo->prepare($sql);
             $stmt -> execute();
         
         }
-                $sql = "SELECT * FROM media" ;
-    //$sql = "SELECT * FROM media ORDER BY id;";
-    $stmt = $pdo->prepare($sql);
-    $stmt -> execute();
+        //$sql = "SELECT * FROM media WHERE userkey = '${_POST['userkey']}'" ;
+        //$sql = "SELECT * FROM media ORDER BY id;";
+    //$stmt = $pdo->prepare($sql);
+    //$stmt -> execute();
     while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)){
 
         //動画と画像で場合分け
