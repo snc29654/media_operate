@@ -176,7 +176,7 @@
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
-                    echo "<input type=\"submit\" value=\"予備\" /></p>";
+                    echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
                     echo "</form>";
             
                     echo "</td>";
@@ -202,7 +202,7 @@
                 echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<textarea name=\"userkey\" rows=\"1\" cols=\"20\" id=\"userkey\" placeholder=\"userkey\" ></textarea>";
-                echo "<input type=\"submit\" value=\"予備\" /></p>";
+                echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
                 echo "</form>";
         
             }    
