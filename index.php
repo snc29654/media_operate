@@ -25,6 +25,12 @@
                 exit;
 
             }
+            if(strlen($userkey) < 6){
+                echo "length must greater than 6";
+                exit;
+
+            }
+
             //画像・動画をバイナリデータにする．
             $raw_data = file_get_contents($_FILES['upfile']['tmp_name']);
 
@@ -98,6 +104,13 @@
                 if($_SERVER["REQUEST_METHOD"] === "POST"){
                     //POST有り
                     $userkey = $_POST["userkey"];
+
+                    if(strlen($userkey) < 6){
+                        echo "length must greater than 6";
+                        exit;
+                    }
+        
+
                     if($userkey==""){
 
                     }else{
