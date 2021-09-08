@@ -164,7 +164,24 @@
         $userkey = $row["userkey"];
         $id = $row["id"];
         if($row["extension"] == "mp4"){
+            echo "<table border =\"3\">";
+            echo "<td>";
             echo ("<video src=\"import_media.php?target=$target\" width=\"426\" height=\"240\" controls></video>");
+                    echo ($row["id"]."<br/>");
+            echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+            echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
+            echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
+            echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
+            echo "<input type=\"submit\" value=\"更新\" /></p>";
+            echo "</form>";
+    
+            echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+            echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
+            echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
+            echo "<input type=\"submit\" value=\"削除\" /></p>";
+            echo "</form>";
+        
+
         }
         elseif($row["extension"] == "jpeg" || $row["extension"] == "png" || $row["extension"] == "gif"){
 
