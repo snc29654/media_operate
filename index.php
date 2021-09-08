@@ -96,18 +96,20 @@
                 echo "<form action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
 
                 if($_SERVER["REQUEST_METHOD"] === "POST"){
+                    //POST有り
                     $userkey = $_POST["userkey"];
                     if($userkey==""){
 
                     }else{
-
-                    echo "<label>画像/動画アップロード</label>";
-                    echo "<input type=\"file\" name=\"upfile\"><br>";
-                    echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" placeholder=\"写真のコメント\" ></textarea>";
-                    echo "<br>";
-                    echo "<label>操作：ファイル選択-->アップロード-->実行</label><br>";
-                    echo "<input type=\"submit\" value=\"アップロード\">";
+                        //userkey有り    
+                        echo "<label>画像/動画アップロード</label>";
+                        echo "<input type=\"file\" name=\"upfile\"><br>";
+                        echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" placeholder=\"写真のコメント\" ></textarea>";
+                        echo "<br>";
+                        echo "<label>操作：ファイル選択-->アップロード-->実行</label><br>";
+                        echo "<input type=\"submit\" value=\"アップロード\">";
                     }        
+                    //POST有り　userkey有り、userkey無し    
 
                     echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
                     echo "<textarea name=\"userkey\" rows=\"1\" cols=\"20\" id=\"userkey\" placeholder=\"userkey\" >$userkey</textarea>";
@@ -118,12 +120,13 @@
     
 
                 }else{
-                echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
-                echo "<textarea name=\"userkey\" rows=\"1\" cols=\"20\" id=\"userkey\" placeholder=\"userkey\" ></textarea>";
-                echo "<input type=\"submit\" value=\"実行\">";
-                echo "</form>";
-                echo "</div>";
-                echo "</div>";
+                    //POST無し
+                    echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
+                    echo "<textarea name=\"userkey\" rows=\"1\" cols=\"20\" id=\"userkey\" placeholder=\"userkey\" ></textarea>";
+                    echo "<input type=\"submit\" value=\"実行\">";
+                    echo "</form>";
+                    echo "</div>";
+                    echo "</div>";
 
                 }
 ?>
