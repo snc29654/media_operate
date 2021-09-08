@@ -94,18 +94,38 @@
                 echo "<div>";
                 echo "<div calss=\"size_test\">";
                 echo "<form action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
-                echo "<label>画像/動画アップロード</label>";
-                echo "<input type=\"file\" name=\"upfile\"><br>";
-                echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" placeholder=\"写真のコメント\" ></textarea>";
-                echo "<br>";
-                echo "<label>操作：ファイル選択-->アップロード-->読み出し</label><br>";
-                echo "<input type=\"submit\" value=\"アップロード\">";
+
+                if($_SERVER["REQUEST_METHOD"] === "POST"){
+                    $userkey = $_POST["userkey"];
+                    if($userkey==""){
+
+                    }else{
+
+                    echo "<label>画像/動画アップロード</label>";
+                    echo "<input type=\"file\" name=\"upfile\"><br>";
+                    echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" placeholder=\"写真のコメント\" ></textarea>";
+                    echo "<br>";
+                    echo "<label>操作：ファイル選択-->アップロード-->実行</label><br>";
+                    echo "<input type=\"submit\" value=\"アップロード\">";
+                    }        
+
+                    echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
+                    echo "<textarea name=\"userkey\" rows=\"1\" cols=\"20\" id=\"userkey\" placeholder=\"userkey\" >$userkey</textarea>";
+                    echo "<input type=\"submit\" value=\"実行\">";
+                    echo "</form>";
+                    echo "</div>";
+                    echo "</div>";
+    
+
+                }else{
                 echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
                 echo "<textarea name=\"userkey\" rows=\"1\" cols=\"20\" id=\"userkey\" placeholder=\"userkey\" ></textarea>";
-                echo "<input type=\"submit\" value=\"読み出し\">";
+                echo "<input type=\"submit\" value=\"実行\">";
                 echo "</form>";
                 echo "</div>";
                 echo "</div>";
+
+                }
 ?>
 <?php
     //DBから取得して表示する．
@@ -165,13 +185,15 @@
 
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
+                    echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                     echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" style=\"background-color:#bde9ba\">$linkid</textarea>";
                         echo "<input type=\"submit\" value=\"更新\" /></p>";
                     echo "</form>";
             
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
-                        echo "<input type=\"submit\" value=\"削除\" /></p>";
+                    echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
+                    echo "<input type=\"submit\" value=\"削除\" /></p>";
                     echo "</form>";
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
@@ -188,12 +210,14 @@
                         echo ($row["id"]."<br/>");
                 echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
                 echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
                 echo "<input type=\"submit\" value=\"更新\" /></p>";
                 echo "</form>";
         
                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+                echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
                 echo "<input type=\"submit\" value=\"削除\" /></p>";
                 echo "</form>";
