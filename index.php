@@ -191,6 +191,7 @@
             echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
             echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
             echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
+            echo "<p>__________________________________________________________";
             echo "<input type=\"submit\" value=\"削除\" /></p>";
             echo "</form>";
         
@@ -226,6 +227,7 @@
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
+                    echo "<p>__________________________________________________________";
                     echo "<input type=\"submit\" value=\"削除\" /></p>";
                     echo "</form>";
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
@@ -252,6 +254,7 @@
                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
+                echo "<p>__________________________________________________________";
                 echo "<input type=\"submit\" value=\"削除\" /></p>";
                 echo "</form>";
             
