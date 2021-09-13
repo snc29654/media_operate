@@ -148,25 +148,25 @@
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         if(isset($_POST["delseg"])){
 
-            $sql = "DELETE FROM media WHERE id = '${_POST['delseg']}'" ;
+            $sql = "DELETE FROM $dbtable WHERE id = '${_POST['delseg']}'" ;
             $stmt = $pdo->prepare($sql);
             $stmt -> execute();
             exit;
         }else if(isset($_POST["update"])){
-            $sql = "UPDATE media SET linkid='${_POST['linkid']}' WHERE id ='${_POST['update']}' ";
+            $sql = "UPDATE $dbtable SET linkid='${_POST['linkid']}' WHERE id ='${_POST['update']}' ";
             $stmt = $pdo->prepare($sql);
             $stmt -> execute();
             exit;
 
         }else{
-            $sql = "SELECT * FROM media WHERE userkey = '${_POST['userkey']}'" ;
-            //$sql = "SELECT * FROM media ORDER BY id;";
+            $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}'" ;
+            //$sql = "SELECT * FROM$dbtableORDER BY id;";
             $stmt = $pdo->prepare($sql);
             $stmt -> execute();
         
         }
-        //$sql = "SELECT * FROM media WHERE userkey = '${_POST['userkey']}'" ;
-        //$sql = "SELECT * FROM media ORDER BY id;";
+        //$sql = "SELECT * FROM$dbtableWHERE userkey = '${_POST['userkey']}'" ;
+        //$sql = "SELECT * FROM$dbtableORDER BY id;";
     //$stmt = $pdo->prepare($sql);
     //$stmt -> execute();
     while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)){

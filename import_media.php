@@ -15,7 +15,7 @@
     );
     try {
         $pdo = new PDO($dsn, $user, $pass);
-        $sql = "SELECT * FROM media WHERE fname = :target;";
+        $sql = "SELECT * FROM $dbtable WHERE fname = :target;";
         $stmt = $pdo->prepare($sql);
         $stmt -> bindValue(":target", $target, PDO::PARAM_STR);
         $stmt -> execute();
