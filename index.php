@@ -62,7 +62,7 @@
             $fname = hash("sha256", $fname);
 
             //画像・動画をDBに格納．
-            $sql = "INSERT INTO media(linkid,userkey, fname, extension, raw_data) VALUES (:linkid, :userkey, :fname, :extension, :raw_data);";
+            $sql = "INSERT INTO $dbtable(linkid,userkey, fname, extension, raw_data) VALUES (:linkid, :userkey, :fname, :extension, :raw_data);";
             $stmt = $pdo->prepare($sql);
             $stmt -> bindValue(":linkid",$linkid, PDO::PARAM_STR);
             $stmt -> bindValue(":userkey",$userkey, PDO::PARAM_STR);
