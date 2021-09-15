@@ -98,7 +98,7 @@
 
 
                 echo "<div>";
-                echo "<div calss=\"size_test\">";
+                echo "<div style=\"background-color:#CDF7FF;\" calss=\"size_test\">";
                 echo "<form action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
 
                 if($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -178,6 +178,7 @@
     //$stmt = $pdo->prepare($sql);
     //$stmt -> execute();
     while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)){
+        echo "<div style=\"background-color:#CDE7FF;\" calss=\"size_test\">";
 
         //動画と画像で場合分け
         $target = $row["fname"];
@@ -295,6 +296,7 @@
         
             }    
             echo "</td>";
+            echo "</div>";
 
         }
     }
