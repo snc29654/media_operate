@@ -146,7 +146,15 @@
 <?php
     //DBから取得して表示する．
     if($_SERVER["REQUEST_METHOD"] === "POST"){
-        if(isset($_POST["delseg"])){
+
+        if(isset($_POST["adddel"])){
+
+            $sql = "DELETE FROM $dbtable WHERE id = '${_POST['adddel']}'" ;
+            $stmt = $pdo->prepare($sql);
+            $stmt -> execute();
+            exit;
+
+        }else if(isset($_POST["delseg"])){
 
             $sql = "DELETE FROM $dbtable WHERE id = '${_POST['delseg']}'" ;
             $stmt = $pdo->prepare($sql);
@@ -236,8 +244,28 @@
                     echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
                     echo "</form>";
             
-                    echo "</td>";
                                 echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
+
+
+                                echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
+ 
+                                echo "<input type=\"file\" name=\"upfile\"><br>";
+                                echo "<p><input type=\"hidden\" size=5 id=\"adddel\" name=\"adddel\" value=\"$id\">";
+                                echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
+                                echo "<p><input type=\"hidden\"  id=\"linkid\" name=\"linkid\" value=\"$linkid\">";
+                                echo "<br>";
+                                echo "<input type=\"submit\" value=\"画像更新\">";
+                                echo "</form>";
+                
+
+                                echo "</td>";
+
+
+
+
+
+
+
                 }        
             }else{
                 echo "<table border =\"3\">";
