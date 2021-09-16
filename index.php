@@ -175,13 +175,13 @@
             $stmt -> execute();
             exit;
         }else if(isset($_POST["update"])){
-            $sql = "UPDATE $dbtable SET linkid='${_POST['linkid']}' WHERE id ='${_POST['update']}' ";
+            $sql = "UPDATE $dbtable SET linkid='${_POST['linkid']}' WHERE id ='${_POST['update']}'";
             $stmt = $pdo->prepare($sql);
             $stmt -> execute();
             exit;
 
         }else{
-            $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}'" ;
+            $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}' AND password ='${_POST['password']}' " ;
             //$sql = "SELECT * FROM$dbtableORDER BY id;";
             $stmt = $pdo->prepare($sql);
             $stmt -> execute();
