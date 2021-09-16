@@ -20,7 +20,7 @@
 
             $linkid = $_POST["linkid"];
             $userkey = $_POST["userkey"];
-            $password = $_POST["password"];
+            $kindvalue = $_POST["kindvalue"];
             if($userkey==""){
                 echo "no input userkey";
                 exit;
@@ -32,8 +32,8 @@
 
             }
 
-            if(strlen($password) < 8){
-                echo "password must greater than 8";
+            if(strlen($kindvalue) < 1){
+                echo "kindvalue must greater than 8";
                 exit;
 
             }
@@ -72,11 +72,11 @@
             $fname = hash("sha256", $fname);
 
             //画像・動画をDBに格納．
-            $sql = "INSERT INTO $dbtable(linkid,userkey, password,fname, extension, raw_data) VALUES (:linkid, :userkey, :password, :fname, :extension, :raw_data);";
+            $sql = "INSERT INTO $dbtable(linkid,userkey, kindvalue,fname, extension, raw_data) VALUES (:linkid, :userkey, :kindvalue, :fname, :extension, :raw_data);";
             $stmt = $pdo->prepare($sql);
             $stmt -> bindValue(":linkid",$linkid, PDO::PARAM_STR);
             $stmt -> bindValue(":userkey",$userkey, PDO::PARAM_STR);
-            $stmt -> bindValue(":password",$password, PDO::PARAM_STR);
+            $stmt -> bindValue(":kindvalue",$kindvalue, PDO::PARAM_STR);
             $stmt -> bindValue(":fname",$fname, PDO::PARAM_STR);
             $stmt -> bindValue(":extension",$extension, PDO::PARAM_STR);
             $stmt -> bindValue(":raw_data",$raw_data, PDO::PARAM_STR);
@@ -115,7 +115,7 @@
                 if($_SERVER["REQUEST_METHOD"] === "POST"){
                     //POST有り
                     $userkey = $_POST["userkey"];
-                    $password = $_POST["password"];
+                    $kindvalue = $_POST["kindvalue"];
 
                     if(strlen($userkey) < 6){
                         echo "length must greater than 6";
@@ -138,7 +138,7 @@
 
                     echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
                     echo "<input type=\"text\" size=30 id=\"userkey\" name=\"userkey\" value=$userkey>";
-                    echo "<input type=\"password\" size=30 id=\"password\" name=\"password\" value=$password>";
+                    echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
                     echo "<input type=\"submit\" value=\"実行\">";
                     echo "</form>";
                     echo "</div>";
@@ -149,7 +149,7 @@
                     //POST無し
                     echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
                     echo "<input type=\"text\" size=30 id=\"userkey\" name=\"userkey\" placeholder=\"userkey\">";
-                    echo "<input type=\"password\" size=30 id=\"password\" name=\"password\" placeholder=\"password\">";
+                    echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" placeholder=\"kindvalue\">";
                     echo "<input type=\"submit\" value=\"実行\">";
                     echo "</form>";
                     echo "</div>";
@@ -181,7 +181,7 @@
             exit;
 
         }else{
-            $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}' AND password ='${_POST['password']}' " ;
+            $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}' AND kindvalue ='${_POST['kindvalue']}' " ;
             //$sql = "SELECT * FROM$dbtableORDER BY id;";
             $stmt = $pdo->prepare($sql);
             $stmt -> execute();
@@ -200,7 +200,7 @@
         $userkey = $row["userkey"];
         $id = $row["id"];
 
-        if(strcmp($_POST['password'],$row['password'])==0){
+        if(strcmp($_POST['kindvalue'],$row['kindvalue'])==0){
           
           } else {
             echo 'パスワードが間違っています。';
@@ -215,7 +215,7 @@
                     echo ($row["id"]."<br/>");
             echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
             echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
-            echo "<input type=\"hidden\" size=30 id=\"password\" name=\"password\" value=$password>";
+            echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
             echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
             echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
             echo "<input type=\"submit\" value=\"更新\" /></p>";
@@ -223,7 +223,7 @@
     
             echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
             echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
-            echo "<input type=\"hidden\" size=30 id=\"password\" name=\"password\" value=$password>";
+            echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
             echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
             echo "<p>__________________________________________________________";
             echo "<input type=\"submit\" value=\"削除\" /></p>";
@@ -254,14 +254,14 @@
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
-                    echo "<input type=\"hidden\" size=30 id=\"password\" name=\"password\" value=$password>";
+                    echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
                     echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" style=\"background-color:#bde9ba\">$linkid</textarea>";
                         echo "<input type=\"submit\" value=\"更新\" /></p>";
                     echo "</form>";
             
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
-                    echo "<input type=\"hidden\" size=30 id=\"password\" name=\"password\" value=$password>";
+                    echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
                     echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                     echo "<p>__________________________________________________________";
                     echo "<input type=\"submit\" value=\"削除\" /></p>";
@@ -269,7 +269,7 @@
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
-                    echo "<input type=\"hidden\" size=30 id=\"password\" name=\"password\" value=$password>";
+                    echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
                     echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
                     echo "</form>";
             
@@ -281,7 +281,7 @@
                                 echo "<input type=\"file\" name=\"upfile\"><br>";
                                 echo "<p><input type=\"hidden\" size=5 id=\"adddel\" name=\"adddel\" value=\"$id\">";
                                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
-                                echo "<input type=\"hidden\" size=30 id=\"password\" name=\"password\" value=$password>";
+                                echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
                                 echo "<p><input type=\"hidden\"  id=\"linkid\" name=\"linkid\" value=\"$linkid\">";
                                 echo "<br>";
                                 echo "<input type=\"submit\" value=\"画像更新\">";
@@ -305,13 +305,13 @@
                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
-                echo "<input type=\"hidden\" size=30 id=\"password\" name=\"password\" value=$password>";
+                echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
                 echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
                 echo "<input type=\"submit\" value=\"更新\" /></p>";
                 echo "</form>";
         
                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
-                echo "<input type=\"hidden\" size=30 id=\"password\" name=\"password\" value=$password>";
+                echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
                 echo "<p>__________________________________________________________";
@@ -320,7 +320,7 @@
             
                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"selseg\" name=\"selseg\" value=\"$id\">";
-                echo "<input type=\"hidden\" size=30 id=\"password\" name=\"password\" value=$password>";
+                echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<textarea name=\"userkey\" rows=\"1\" cols=\"20\" id=\"userkey\" placeholder=\"userkey\" ></textarea>";
                 echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
