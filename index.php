@@ -138,7 +138,7 @@
 
                     echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
                     echo "<input type=\"text\" size=30 id=\"userkey\" name=\"userkey\" value=$userkey>";
-                    echo "<input type=\"text\" size=30 id=\"password\" name=\"password\" value=$password>";
+                    echo "<input type=\"password\" size=30 id=\"password\" name=\"password\" value=$password>";
                     echo "<input type=\"submit\" value=\"実行\">";
                     echo "</form>";
                     echo "</div>";
@@ -149,7 +149,7 @@
                     //POST無し
                     echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
                     echo "<input type=\"text\" size=30 id=\"userkey\" name=\"userkey\" placeholder=\"userkey\">";
-                    echo "<input type=\"text\" size=30 id=\"password\" name=\"password\" placeholder=\"password\">";
+                    echo "<input type=\"password\" size=30 id=\"password\" name=\"password\" placeholder=\"password\">";
                     echo "<input type=\"submit\" value=\"実行\">";
                     echo "</form>";
                     echo "</div>";
