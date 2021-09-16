@@ -281,7 +281,7 @@
                                 echo "<input type=\"file\" name=\"upfile\"><br>";
                                 echo "<p><input type=\"hidden\" size=5 id=\"adddel\" name=\"adddel\" value=\"$id\">";
                                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
-                                echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
+                                echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue style=\"background-color:#bde9ba\">";
                                 echo "<p><input type=\"hidden\"  id=\"linkid\" name=\"linkid\" value=\"$linkid\">";
                                 echo "<br>";
                                 echo "<input type=\"submit\" value=\"画像更新\">";
