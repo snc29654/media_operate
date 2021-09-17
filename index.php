@@ -181,7 +181,15 @@
             exit;
 
         }else{
-            $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}' AND kindvalue ='${_POST['kindvalue']}' " ;
+            if(strcmp($_POST['kindvalue'],"*")==0){
+
+                $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}' " ;
+
+            }else{
+
+                $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}' AND kindvalue ='${_POST['kindvalue']}' " ;
+
+            }
             //$sql = "SELECT * FROM$dbtableORDER BY id;";
             $stmt = $pdo->prepare($sql);
             $stmt -> execute();
@@ -199,13 +207,8 @@
         $linkid = $row["linkid"];
         $userkey = $row["userkey"];
         $id = $row["id"];
+        $kindvalue = $row["kindvalue"];
 
-        if(strcmp($_POST['kindvalue'],$row['kindvalue'])==0){
-          
-          } else {
-            echo 'パスワードが間違っています。';
-            exit;
-          }
           
 
         if($row["extension"] == "mp4"){
