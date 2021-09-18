@@ -5,7 +5,11 @@ $fp = fopen($counter_file, 'r+');
 if ($fp) {
     if (flock($fp, LOCK_EX)) {
         $counter = fgets($fp, $counter_lenght);
-        $counter++;
+        if($_SERVER["REQUEST_METHOD"] === "POST"){
+
+        }else{
+            $counter++;
+        }    
         rewind($fp);
         if (fwrite($fp,  $counter) === FALSE) {
             echo ('<p>'.'ファイル書き込みに失敗しました'.'</p>');
