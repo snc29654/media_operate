@@ -148,11 +148,14 @@
                 }else{
                     //POST無し
                     echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
+                    echo "<label>写真と文書の記録サイトです</label><br>";
                     echo "<input type=\"text\" size=30 id=\"userkey\" name=\"userkey\" placeholder=\"userkey\">";
                     echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" placeholder=\"kindvalue\">";
                     echo "<input type=\"submit\" value=\"実行\">";
                     echo "</form>";
                     echo "</div>";
+                    echo "<label>uesrkey:6文字以上の任意文字　　　　kindvalue:1文字以上の任意文字</label><br>";
+                    echo "<label>例：写真集　　　　　　　　　　　　　例：フリー素材</label><br>";
                     echo "</div>";
 
                 }
