@@ -5,4 +5,5 @@ $pass = "";
 $dbname = "mediatest"; 
 $dbtable = "media3"; 
 $dsn = "mysql:host=localhost;dbname=mediatest;charset=utf8";
+$email_to ="";
 ?>
