@@ -18,7 +18,6 @@ if ($fp) {
             mb_language("Japanese");
             mb_internal_encoding("UTF-8");
             if(mb_send_mail($email_to,"media_operate","アクセスしました")){
-              echo "mail success";
             } else {
               echo "mail fail";
             };
