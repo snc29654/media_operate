@@ -10,3 +10,7 @@ textarea {
 select {
     font-size:  30px;    /* 文字サイズ指定 */
 }
+textarea{
+    width:100%;
+    height:30%;
+    }

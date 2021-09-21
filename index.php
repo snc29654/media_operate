@@ -226,7 +226,7 @@ echo '</p>';
                         //userkey有り    
                         echo "<label>画像/動画アップロード</label>";
                         echo "<input type=\"file\" name=\"upfile\"><br>";
-                        echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" placeholder=\"写真のコメント\" ></textarea>";
+                        echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" style=\"width:100%\" placeholder=\"写真のコメント\" ></textarea>";
                         echo "<br>";
                         echo "<label>操作：ファイル選択-->アップロード-->実行</label><br>";
                         echo "<input type=\"submit\" value=\"アップロード\">";
@@ -317,7 +317,6 @@ echo '</p>';
         $id = $row["id"];
         $kindvalue = $row["kindvalue"];
 
-          
 
         if($row["extension"] == "mp4"){
             echo "<table border =\"3\">";
@@ -328,7 +327,7 @@ echo '</p>';
             echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
             echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
             echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
-            echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
+            echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\"  style=\"width:100%\" id=\"linkid\" >$linkid</textarea>";
             echo "<input type=\"submit\" value=\"更新\" /></p>";
             echo "</form>";
     
@@ -366,7 +365,7 @@ echo '</p>';
                     echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                     echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue style=\"background-color:#bde9ba\"></p>";
-                    echo "<p><textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" style=\"background-color:#bde9ba\">$linkid</textarea>";
+                    echo "<p><textarea name=\"linkid\" rows=\"10\" cols=\"80\"  style=\"width:100%\" id=\"linkid\" style=\"background-color:#bde9ba\">$linkid</textarea>";
                         echo "<input type=\"submit\" value=\"更新\" /></p>";
                     echo "</form>";
             
@@ -417,7 +416,7 @@ echo '</p>';
                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
                 echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
-                echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\" id=\"linkid\" >$linkid</textarea>";
+                echo "<textarea name=\"linkid\" rows=\"10\" cols=\"80\"  style=\"width:100%\" id=\"linkid\" >$linkid</textarea>";
                 echo "<input type=\"submit\" value=\"更新\" /></p>";
                 echo "</form>";
         
