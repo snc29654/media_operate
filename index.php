@@ -47,11 +47,11 @@ echo '</p>';
 
 
         //ファイルアップロードがあったとき
-        if (isset($_FILES['upfile']['error']) && is_int($_FILES['upfile']['error']) && $_FILES["upfile"]["name"] !== ""){
 
 
-            if(strcmp($_POST['action'],"filenoup")==0){
-                echo "<script>alert(\"ファイルはアップロードしません\")</script>";
+        if( isset($_POST['fileact']) && strcmp($_POST['fileact'],"filenoup")==0){
+            echo "<script>alert(\"ファイルはアップロードしません\")</script>";
+            if (isset($_FILES['upfile']['error']) && is_int($_FILES['upfile']['error'])){
 
                 $linkid = $_POST["linkid"];
                 $userkey = $_POST["userkey"];
@@ -92,18 +92,19 @@ echo '</p>';
                 $stmt -> bindValue(":raw_data",$raw_data, PDO::PARAM_STR);
                 $stmt -> execute();
     
+            }    
 
 
-
-            }else{
+        }else{
     
     
     
     
+            if (isset($_FILES['upfile']['error']) && is_int($_FILES['upfile']['error']) && $_FILES["upfile"]["name"] !== ""){
 
 
             //エラーチェック
-            switch ($_FILES['upfile']['error']) {
+                switch ($_FILES['upfile']['error']) {
                 case UPLOAD_ERR_OK: // OK
                     break;
                 case UPLOAD_ERR_NO_FILE:   // 未選択
@@ -112,75 +113,74 @@ echo '</p>';
                     throw new RuntimeException('ファイルサイズが大きすぎます', 400);
                 default:
                     throw new RuntimeException('その他のエラーが発生しました', 500);
+                }
+
+                $linkid = $_POST["linkid"];
+                $userkey = $_POST["userkey"];
+                $kindvalue = $_POST["kindvalue"];
+                if($userkey==""){
+                    echo "no input userkey";
+                    exit;
+
+                }
+                if(strlen($userkey) < 6){
+                    echo "length must greater than 6";
+                    exit;
+
+                }
+
+                if(strlen($kindvalue) < 1){
+                    echo "kindvalue must greater than 8";
+                    exit;
+
+                }
+
+
+
+
+                //画像・動画をバイナリデータにする．
+                $raw_data = file_get_contents($_FILES['upfile']['tmp_name']);
+
+                //拡張子を見る
+                $tmp = pathinfo($_FILES["upfile"]["name"]);
+                $extension = $tmp["extension"];
+                if($extension === "jpg" || $extension === "jpeg" || $extension === "JPG" || $extension === "JPEG"){
+                    $extension = "jpeg";
+                }
+                elseif($extension === "png" || $extension === "PNG"){
+                    $extension = "png";
+                }
+                elseif($extension === "gif" || $extension === "GIF"){
+                    $extension = "gif";
+                }
+                elseif($extension === "mp4" || $extension === "MP4"){
+                    $extension = "mp4";
+                }
+                else{
+                    echo "非対応ファイルです．<br/>";
+                    echo ("<a href=\"index.php\">戻る</a><br/>");
+                    exit(1);
+                }
+
+                //DBに格納するファイルネーム設定
+                //サーバー側の一時的なファイルネームと取得時刻を結合した文字列にsha256をかける．
+                $date = getdate();
+                $fname = $_FILES["upfile"]["tmp_name"].$date["year"].$date["mon"].$date["mday"].$date["hours"].$date["minutes"].$date["seconds"];
+                $fname = hash("sha256", $fname);
+
+                //画像・動画をDBに格納．
+                $sql = "INSERT INTO $dbtable(linkid,userkey, kindvalue,fname, extension, raw_data) VALUES (:linkid, :userkey, :kindvalue, :fname, :extension, :raw_data);";
+                $stmt = $pdo->prepare($sql);
+                $stmt -> bindValue(":linkid",$linkid, PDO::PARAM_STR);
+                $stmt -> bindValue(":userkey",$userkey, PDO::PARAM_STR);
+                $stmt -> bindValue(":kindvalue",$kindvalue, PDO::PARAM_STR);
+                $stmt -> bindValue(":fname",$fname, PDO::PARAM_STR);
+                $stmt -> bindValue(":extension",$extension, PDO::PARAM_STR);
+                $stmt -> bindValue(":raw_data",$raw_data, PDO::PARAM_STR);
+                $stmt -> execute();
+
             }
-
-            $linkid = $_POST["linkid"];
-            $userkey = $_POST["userkey"];
-            $kindvalue = $_POST["kindvalue"];
-            if($userkey==""){
-                echo "no input userkey";
-                exit;
-
-            }
-            if(strlen($userkey) < 6){
-                echo "length must greater than 6";
-                exit;
-
-            }
-
-            if(strlen($kindvalue) < 1){
-                echo "kindvalue must greater than 8";
-                exit;
-
-            }
-
-
-
-
-            //画像・動画をバイナリデータにする．
-            $raw_data = file_get_contents($_FILES['upfile']['tmp_name']);
-
-            //拡張子を見る
-            $tmp = pathinfo($_FILES["upfile"]["name"]);
-            $extension = $tmp["extension"];
-            if($extension === "jpg" || $extension === "jpeg" || $extension === "JPG" || $extension === "JPEG"){
-                $extension = "jpeg";
-            }
-            elseif($extension === "png" || $extension === "PNG"){
-                $extension = "png";
-            }
-            elseif($extension === "gif" || $extension === "GIF"){
-                $extension = "gif";
-            }
-            elseif($extension === "mp4" || $extension === "MP4"){
-                $extension = "mp4";
-            }
-            else{
-                echo "非対応ファイルです．<br/>";
-                echo ("<a href=\"index.php\">戻る</a><br/>");
-                exit(1);
-            }
-
-            //DBに格納するファイルネーム設定
-            //サーバー側の一時的なファイルネームと取得時刻を結合した文字列にsha256をかける．
-            $date = getdate();
-            $fname = $_FILES["upfile"]["tmp_name"].$date["year"].$date["mon"].$date["mday"].$date["hours"].$date["minutes"].$date["seconds"];
-            $fname = hash("sha256", $fname);
-
-            //画像・動画をDBに格納．
-            $sql = "INSERT INTO $dbtable(linkid,userkey, kindvalue,fname, extension, raw_data) VALUES (:linkid, :userkey, :kindvalue, :fname, :extension, :raw_data);";
-            $stmt = $pdo->prepare($sql);
-            $stmt -> bindValue(":linkid",$linkid, PDO::PARAM_STR);
-            $stmt -> bindValue(":userkey",$userkey, PDO::PARAM_STR);
-            $stmt -> bindValue(":kindvalue",$kindvalue, PDO::PARAM_STR);
-            $stmt -> bindValue(":fname",$fname, PDO::PARAM_STR);
-            $stmt -> bindValue(":extension",$extension, PDO::PARAM_STR);
-            $stmt -> bindValue(":raw_data",$raw_data, PDO::PARAM_STR);
-            $stmt -> execute();
-
         }
-    }
-
     }
     catch(PDOException $e){
         echo("<p>500 Inertnal Server Error</p>");
@@ -231,7 +231,7 @@ echo '</p>';
                         echo "<label>操作：ファイル選択-->アップロード-->実行</label><br>";
                         echo "<input type=\"submit\" value=\"アップロード\">";
 
-                        echo "<select name=\"action\" id=\"action\">";
+                        echo "<select name=\"fileact\" id=\"fileact\">";
                         echo "<option value=\"fileup\">アップロードする</option>";
                         echo "<option value=\"filenoup\">アップロードしない</option>";
                         echo "</select></p>";
