@@ -44,8 +44,64 @@ echo '</p>';
     try{
         $pdo = new PDO($dsn, $user, $pass);
 
+
+
         //ファイルアップロードがあったとき
         if (isset($_FILES['upfile']['error']) && is_int($_FILES['upfile']['error']) && $_FILES["upfile"]["name"] !== ""){
+
+
+            if(strcmp($_POST['action'],"filenoup")==0){
+                echo "<script>alert(\"ファイルはアップロードしません\")</script>";
+
+                $linkid = $_POST["linkid"];
+                $userkey = $_POST["userkey"];
+                $kindvalue = $_POST["kindvalue"];
+                if($userkey==""){
+                    echo "no input userkey";
+                    exit;
+    
+                }
+                if(strlen($userkey) < 6){
+                    echo "length must greater than 6";
+                    exit;
+    
+                }
+    
+                if(strlen($kindvalue) < 1){
+                    echo "kindvalue must greater than 8";
+                    exit;
+    
+                }
+    
+                //画像・動画をバイナリデータにする．
+                $raw_data = 1;
+    
+                //拡張子を見る
+                $extension = "jpeg";
+    
+                $fname = "dummy";
+    
+                //画像・動画をDBに格納．
+                $sql = "INSERT INTO $dbtable(linkid,userkey, kindvalue,fname, extension, raw_data) VALUES (:linkid, :userkey, :kindvalue, :fname, :extension, :raw_data);";
+                $stmt = $pdo->prepare($sql);
+                $stmt -> bindValue(":linkid",$linkid, PDO::PARAM_STR);
+                $stmt -> bindValue(":userkey",$userkey, PDO::PARAM_STR);
+                $stmt -> bindValue(":kindvalue",$kindvalue, PDO::PARAM_STR);
+                $stmt -> bindValue(":fname",$fname, PDO::PARAM_STR);
+                $stmt -> bindValue(":extension",$extension, PDO::PARAM_STR);
+                $stmt -> bindValue(":raw_data",$raw_data, PDO::PARAM_STR);
+                $stmt -> execute();
+    
+
+
+
+            }else{
+    
+    
+    
+    
+
+
             //エラーチェック
             switch ($_FILES['upfile']['error']) {
                 case UPLOAD_ERR_OK: // OK
@@ -123,6 +179,7 @@ echo '</p>';
             $stmt -> execute();
 
         }
+    }
 
     }
     catch(PDOException $e){
@@ -173,6 +230,14 @@ echo '</p>';
                         echo "<br>";
                         echo "<label>操作：ファイル選択-->アップロード-->実行</label><br>";
                         echo "<input type=\"submit\" value=\"アップロード\">";
+
+                        echo "<select name=\"action\" id=\"action\">";
+                        echo "<option value=\"fileup\">アップロードする</option>";
+                        echo "<option value=\"filenoup\">アップロードしない</option>";
+                        echo "</select></p>";
+                                            
+
+
                     }        
                     //POST有り　userkey有り、userkey無し    
 
