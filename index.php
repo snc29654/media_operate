@@ -235,7 +235,14 @@ echo '</p>';
                         echo "<option value=\"fileup\">アップロードする</option>";
                         echo "<option value=\"filenoup\">アップロードしない</option>";
                         echo "</select></p>";
-                                            
+                        echo "<form>";
+                        echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
+                        echo "<input type=\"hidden\" size=30 id=\"userkey\" name=\"userkey\" value=$userkey>";
+                        echo "<input type=\"hidden\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
+                        echo "<input type=\"text\" size=30 id=\"srchvalue\" name=\"srchvalue\">";
+                        echo "<input type=\"submit\" value=\"検索\"></p>";
+                        echo "</form>";
+                                                
 
 
                     }        
@@ -247,6 +254,10 @@ echo '</p>';
                     echo "<input type=\"submit\" value=\"実行\">";
                     echo "</form>";
                     echo "</div>";
+
+
+
+
                     echo "</div>";
     
 
@@ -288,6 +299,7 @@ echo '</p>';
             $stmt -> execute();
             exit;
 
+
         }else{
             if(strcmp($_POST['kindvalue'],"*")==0){
 
@@ -295,8 +307,18 @@ echo '</p>';
 
             }else{
 
-                $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}' AND kindvalue ='${_POST['kindvalue']}' " ;
 
+                if(isset($_POST["srchvalue"])){   
+
+                    $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}' AND kindvalue ='${_POST['kindvalue']}' AND linkid LIKE '%" . $_POST["srchvalue"] . "%'" ;
+
+
+                }else{
+
+                    $sql = "SELECT * FROM $dbtable WHERE userkey = '${_POST['userkey']}' AND kindvalue ='${_POST['kindvalue']}' " ;
+
+
+                }
             }
             //$sql = "SELECT * FROM$dbtableORDER BY id;";
             $stmt = $pdo->prepare($sql);
@@ -358,13 +380,19 @@ echo '</p>';
                     echo "<table border =\"3\">";
                     echo "<td>";
                                 echo ($row["id"]."<br/>");
+                    if(isset($_POST["srchvalue"])){
+                        $srchvalue = $_POST["srchvalue"];
 
+                    }else{
+                        $srchvalue = "検索無し";
 
+                    }
 
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
-                    echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue style=\"background-color:#bde9ba\"></p>";
+                    echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue style=\"background-color:#bde9ba\">";
+                    echo "<input type=\"text\" size=30 id=\"srchvalue\" name=\"srchvalue\" value=$srchvalue style=\"background-color:#bde9ba\"></p>";
                     echo "<p><textarea name=\"linkid\" rows=\"10\" cols=\"80\"  style=\"width:100%\" id=\"linkid\" style=\"background-color:#bde9ba\">$linkid</textarea>";
                         echo "<input type=\"submit\" value=\"更新\" /></p>";
                     echo "</form>";
