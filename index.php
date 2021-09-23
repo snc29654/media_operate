@@ -44,6 +44,7 @@ echo '</p>';
     try{
         $pdo = new PDO($dsn, $user, $pass);
 
+        $date=date('Y年m月d日 H時i分s秒')."\n";
 
 
         //ファイルアップロードがあったとき
@@ -53,7 +54,7 @@ echo '</p>';
             echo "<script>alert(\"ファイルはアップロードしません\")</script>";
             if (isset($_FILES['upfile']['error']) && is_int($_FILES['upfile']['error'])){
 
-                $linkid = $_POST["linkid"];
+                $linkid = $date.$_POST["linkid"];
                 $userkey = $_POST["userkey"];
                 $kindvalue = $_POST["kindvalue"];
                 if($userkey==""){
@@ -115,7 +116,7 @@ echo '</p>';
                     throw new RuntimeException('その他のエラーが発生しました', 500);
                 }
 
-                $linkid = $_POST["linkid"];
+                $linkid = $date.$_POST["linkid"];
                 $userkey = $_POST["userkey"];
                 $kindvalue = $_POST["kindvalue"];
                 if($userkey==""){
