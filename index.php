@@ -414,7 +414,7 @@ echo '</p>';
                     echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
                     echo "</form>";
             
-                                echo ("<img src='import_media.php?target=$target'   width=\"200\" height=\"150\">");
+                                echo ("<img src='import_media.php?target=$target'   width=\"400\" height=\"300\">");
 
 
                                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
@@ -442,7 +442,7 @@ echo '</p>';
                 echo "<table border =\"3\">";
                 echo "<td>";
                         echo ($row["id"]."<br/>");
-                echo ("<img src='import_media.php?target=$target'   width=\"200\" height=\"150\">");
+                echo ("<img src='import_media.php?target=$target'   width=\"400\" height=\"300\">");
                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
