@@ -1,11 +1,11 @@
 <?php
     include('param.php');
     if(isset($_POST['userkey'])) {
-        setcookie('userkey',$_POST['userkey']);
+        setcookie('userkey',$_POST['userkey'],time()+60*60*24*365);
     }
     
     if(isset($_POST['kindvalue'])) {
-        setcookie('kindvalue',$_POST['kindvalue']);
+        setcookie('kindvalue',$_POST['kindvalue'],time()+60*60*24*365);
     }
 
 
