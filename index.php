@@ -1,6 +1,12 @@
 <?php
     include('param.php');
-
+    if(isset($_POST['userkey'])) {
+        setcookie('userkey',$_POST['userkey']);
+    }
+    
+    if(isset($_POST['kindvalue'])) {
+        setcookie('kindvalue',$_POST['kindvalue']);
+    }
 
 
 $counter_file = 'count.txt';
@@ -268,8 +274,24 @@ echo '</p>';
                     //POST無し
                     echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
                     echo "<label>写真と文書の記録サイトです</label><br>";
-                    echo "<input type=\"text\" size=30 id=\"userkey\" name=\"userkey\" placeholder=\"userkey\">";
-                    echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" placeholder=\"kindvalue\">";
+                    if(!empty($_COOKIE['userkey'])){
+                        $userkey = $_COOKIE['userkey'];
+
+                        echo "<input type=\"text\" size=30 id=\"userkey\" name=\"userkey\" value=$userkey>";
+
+                    }else{
+                        echo "<input type=\"text\" size=30 id=\"userkey\" name=\"userkey\" placeholder=\"userkey\">";
+
+                    }    
+                    if(!empty($_COOKIE['kindvalue'])){
+                        $kindvalue = $_COOKIE['kindvalue'];
+
+                        echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" value=$kindvalue>";
+                    }else{
+                        echo "<input type=\"text\" size=30 id=\"kindvalue\" name=\"kindvalue\" placeholder=\"kindvalue\">";
+
+                    }
+
                     echo "<input type=\"submit\" value=\"実行\">";
                     echo "</form>";
                     echo "</div>";
