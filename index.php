@@ -241,8 +241,8 @@ echo '</p>';
                         echo "<input type=\"submit\" value=\"アップロード\">";
 
                         echo "<select name=\"fileact\" id=\"fileact\">";
-                        echo "<option value=\"fileup\">アップロードする</option>";
-                        echo "<option value=\"filenoup\">アップロードしない</option>";
+                        echo "<option value=\"fileup\">画像アップロードする</option>";
+                        echo "<option value=\"filenoup\">画像アップロードしない</option>";
                         echo "</select></p>";
                         echo "<form>";
                         echo "<action=\"index.php\" enctype=\"multipart/form-data\" method=\"post\">";
