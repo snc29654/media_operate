@@ -276,7 +276,7 @@ echo '</p>';
                     echo "<label>写真と文書の記録サイトです</label><br>";
                     if(!empty($_COOKIE['userkey'])){
                         $userkey = $_COOKIE['userkey'];
-
+                        echo "<p>以下の設定は、あなたが過去に設定した値です</p><br>";
                         echo "<input type=\"text\" size=30 id=\"userkey\" name=\"userkey\" value=$userkey>";
 
                     }else{
