@@ -369,7 +369,7 @@ echo '</p>';
         if($row["extension"] == "mp4"){
             echo "<table border =\"3\">";
             echo "<td>";
-            echo ("<video src=\"import_media.php?target=$target\" width=\"426\" height=\"240\" controls></video>");
+            echo ("<video src=\"import_media.php?target=$target\" width=\"426\" height=\"auto\" controls></video>");
                     echo ($row["id"]."<br/>");
             echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
             echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
@@ -397,7 +397,7 @@ echo '</p>';
                         echo "<table border =\"3\">";
                         echo "<td>";
                                         echo ($row["id"]."<br/>");
-                        echo ("<img src='import_media.php?target=$target'>");
+                        echo ("<img src='import_media.php?target=$target' width=\"800\" height=\"auto\">");
                         exit;
                     }else{
 //                        echo ("<img src='import_media.php?target=$target'   width=\"150\" height=\"135\">");
@@ -437,7 +437,7 @@ echo '</p>';
                     echo "<input type=\"submit\" value=\"画像拡大\" /></p>";
                     echo "</form>";
             
-                                echo ("<img src='import_media.php?target=$target'   width=\"400\" height=\"300\">");
+                                echo ("<img src='import_media.php?target=$target'   width=\"400\" height=\"auto\">");
 
 
                                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
@@ -465,7 +465,7 @@ echo '</p>';
                 echo "<table border =\"3\">";
                 echo "<td>";
                         echo ($row["id"]."<br/>");
-                echo ("<img src='import_media.php?target=$target'   width=\"400\" height=\"300\">");
+                echo ("<img src='import_media.php?target=$target'   width=\"400\" height=\"auto\">");
                 echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"userkey\" name=\"userkey\" value=\"$userkey\">";
                 echo "<p><input type=\"hidden\" size=5 id=\"update\" name=\"update\" value=\"$id\">";
