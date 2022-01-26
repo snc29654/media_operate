@@ -422,6 +422,7 @@ echo '</p>';
                     echo "<p><textarea name=\"linkid\" rows=\"10\" cols=\"80\"  style=\"width:100%\" id=\"linkid\" style=\"background-color:#bde9ba\">$linkid</textarea>";
                         echo "<input type=\"submit\" value=\"更新\" /></p>";
                     echo "</form>";
+                    echo "<a href=$linkid class=\"html\">httpリンク</a><br>";
             
                     echo "<form action=\"\" method=\"post\" enctype=\"multipart/form-data\">";
                     echo "<p><input type=\"hidden\" size=5 id=\"delseg\" name=\"delseg\" value=\"$id\">";
